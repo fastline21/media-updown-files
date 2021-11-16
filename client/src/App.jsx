@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from './configureStore';
 
@@ -10,10 +10,10 @@ const App = () => {
 	return (
 		<Provider store={configureStore}>
 			<BrowserRouter>
-				<Switch>
+				<Routes>
 					<Route exact path='/' component={Home} />
 					<Route path='*' component={NotFound} />
-				</Switch>
+				</Routes>
 			</BrowserRouter>
 		</Provider>
 	);
