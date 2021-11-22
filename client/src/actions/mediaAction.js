@@ -1,17 +1,18 @@
 import axios from 'axios';
-import { SAVE_MEDIA, MEDIA_ERROR, MEDIA_LOADING } from './types';
+import { SAVE_MEDIA, MEDIA_ERROR, MEDIA_LOADING, CLEAR_SUCCESS } from './types';
 
-export const saveMedia = (media) => async (dispatch) => {
+export const saveMedia = (data) => async (dispatch) => {
 	setLoading(dispatch);
+
 	try {
 		const config = {
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'multipart/form-data',
 			},
 		};
 
-		const res = await axios.post('/api/media', media, config);
-
+		const res = await axios.post('/api/media', data, config);
+		console.log(res.data);
 		dispatch({
 			type: SAVE_MEDIA,
 			payload: res.data,
@@ -26,6 +27,12 @@ export const saveMedia = (media) => async (dispatch) => {
 			},
 		});
 	}
+};
+
+export const clearSuccessMedia = () => (dispatch) => {
+	dispatch({
+		type: CLEAR_SUCCESS,
+	});
 };
 
 const setLoading = (dispatch) => {

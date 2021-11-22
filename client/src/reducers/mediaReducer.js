@@ -1,7 +1,13 @@
-import { SAVE_MEDIA, MEDIA_ERROR, MEDIA_LOADING } from 'actions/types';
+import {
+	SAVE_MEDIA,
+	MEDIA_ERROR,
+	MEDIA_LOADING,
+	CLEAR_SUCCESS,
+} from 'actions/types';
 
 const initialState = {
-	media: null,
+	media: [],
+	success: null,
 	loading: false,
 	error: null,
 };
@@ -12,7 +18,7 @@ export default (state = initialState, action) => {
 		case SAVE_MEDIA:
 			return {
 				...state,
-				media: action.payload,
+				success: true,
 				loading: false,
 			};
 		case MEDIA_LOADING:
@@ -24,6 +30,11 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				error: action.payload,
+			};
+		case CLEAR_SUCCESS:
+			return {
+				...state,
+				success: null,
 			};
 		default:
 			return state;

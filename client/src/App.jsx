@@ -1,20 +1,37 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { SnackbarProvider } from 'notistack';
+import { HelmetProvider } from 'react-helmet-async';
+
 import configureStore from './configureStore';
 
 import Home from 'containers/Home';
+import Output from 'containers/Output';
 import NotFound from 'containers/NotFound';
+
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 const App = () => {
 	return (
 		<Provider store={configureStore}>
-			<BrowserRouter>
-				<Routes>
-					<Route exact path='/' component={Home} />
-					<Route path='*' component={NotFound} />
-				</Routes>
-			</BrowserRouter>
+			<HelmetProvider>
+				<SnackbarProvider
+					maxSnack={3}
+					anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+				>
+					<BrowserRouter>
+						<Header />
+						<Routes>
+							<Route exact path='/' element={<Home />} />
+							<Route exact path='/output' element={<Output />} />
+							<Route path='*' element={<NotFound />} />
+						</Routes>
+						<Footer />
+					</BrowserRouter>
+				</SnackbarProvider>
+			</HelmetProvider>
 		</Provider>
 	);
 };

@@ -7,7 +7,7 @@ const { saveMedia } = require('./../controllers/mediaController');
 
 router.post(
 	'/',
-	expressWrapper((req) => saveMedia(req.body))
+	expressWrapper((req) => saveMedia(req.body, req.files))
 );
 
 module.exports = router;
