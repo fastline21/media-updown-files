@@ -1,8 +1,9 @@
 import React from 'react';
 import { SpeedDial, SpeedDialIcon, SpeedDialAction } from '@mui/material';
+// TODO: Hide until it resolve clear files research.
 import {
-	ClearAll as ClearAllIcon,
-	Clear as ClearIcon,
+	// ClearAll as ClearAllIcon,
+	// Clear as ClearIcon,
 	Download as DownloadIcon,
 } from '@mui/icons-material';
 
@@ -32,13 +33,17 @@ const ActionMenu = ({ clearFiles }) => {
 		{
 			icon: <DownloadIcon />,
 			name: 'Download IMDb',
-			action: () => (window.location.href = '/output'),
+			action: () =>
+				window.open(
+					process.env.REACT_APP_IMDB_IMAGE_DOWNLOADER_URL,
+					'_blank'
+				),
 		},
 	];
 
 	return (
 		<SpeedDial
-			ariaLabel='SpeedDial basic example'
+			ariaLabel="SpeedDial basic example"
 			sx={{ position: 'fixed', bottom: 80, right: 16 }}
 			icon={<SpeedDialIcon />}
 		>
