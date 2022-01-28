@@ -8,9 +8,12 @@ const { root } = require('./../utils/getDir');
 const { md5Hash } = require('./hashController');
 
 const saveMedia = async (body, files) => {
-	const { name, urls } = body;
+	// Body and Files data
+	const { name, urls: downloadURL = [] } = body;
 	const { images: uploadImage = [], videos: uploadVideo = [] } = files || {};
 
+	// Convert variables to array
+	const urls = !Array.isArray(downloadURL) ? [downloadURL] : [...downloadURL];
 	const images = !Array.isArray(uploadImage)
 		? [uploadImage]
 		: [...uploadImage];
@@ -18,19 +21,26 @@ const saveMedia = async (body, files) => {
 		? [uploadVideo]
 		: [...uploadVideo];
 
-	const dir = path.join(root, 'public', name);
+	// Output Name dir
+	const dir = path.join(root, 'output', name);
+
+	// info.json dir
 	const info = path.join(dir, 'info.json');
 
+	// Default info data
 	const downloadedImage = [];
 	const downloadedVideo = [];
 	const uploadedImage = [];
 	const uploadedVideo = [];
 	const errors = [];
 
+	// Create output with name
 	if (!fs.existsSync(dir)) {
+		console.log('creating new folder');
 		fs.mkdirSync(dir, { recursive: true });
 	}
 
+	// Insert info data to info.json
 	if (!fs.existsSync(info)) {
 		fs.writeFileSync(
 			info,
@@ -45,9 +55,11 @@ const saveMedia = async (body, files) => {
 		);
 	}
 
+	// Read info.json and parse data
 	const readInfo = fs.readFileSync(info);
 	const readData = JSON.parse(readInfo);
 
+	// URL
 	if (urls.length > 0) {
 		console.log(`Total URL Images: ${urls.length}`);
 
@@ -100,6 +112,7 @@ const saveMedia = async (body, files) => {
 		console.log(`Total Failed: ${errors.length}`);
 	}
 
+	// Images
 	if (images.length > 0) {
 		images.map((image) => {
 			try {
@@ -114,6 +127,7 @@ const saveMedia = async (body, files) => {
 		console.log(`Total Failed: ${errors.length}`);
 	}
 
+	// Videos
 	if (videos.length > 0) {
 		videos.map((video) => {
 			try {
@@ -127,6 +141,7 @@ const saveMedia = async (body, files) => {
 		console.log(`Total Failed: ${errors.length}`);
 	}
 
+	// New update data
 	const updateData = {
 		...readData,
 		name,
@@ -148,9 +163,12 @@ const saveMedia = async (body, files) => {
 				uploadedVideo.length),
 	};
 
+	// Insert new update data to info.json
 	fs.writeFileSync(info, JSON.stringify(updateData));
 
+	// Success result
 	return {
+		name,
 		downloadedImage,
 		downloadedVideo,
 		uploadedImage,

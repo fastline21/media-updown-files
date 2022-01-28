@@ -5,24 +5,22 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
-		"server": "nodemon index.js",
+		"server": "npm start --prefix server",
 		"client": "npm start --prefix client",
 		"dev": "concurrently \"npm run server\" \"npm run client\""
 	},
-	"keywords": [],
-	"author": "Joshwa Facistol",
-	"license": "ISC",
-	"dependencies": {
-		"axios": "^0.24.0",
-		"cors": "^2.8.5",
-		"express": "^4.17.1",
-		"express-fileupload": "^1.2.1",
-		"morgan": "^1.10.0",
-		"uuid": "^8.3.2"
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/fastline21/media-updown-files.git"
 	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/fastline21/media-updown-files/issues"
+	},
+	"homepage": "https://github.com/fastline21/media-updown-files#readme",
 	"devDependencies": {
-		"concurrently": "^6.4.0",
-		"dotenv": "^10.0.0",
-		"nodemon": "^2.0.15"
+		"concurrently": "^6.4.0"
 	}
 }

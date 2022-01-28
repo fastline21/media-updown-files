@@ -6,7 +6,7 @@ import {
 } from 'actions/types';
 
 const initialState = {
-	media: [],
+	media: {},
 	success: null,
 	loading: false,
 	error: null,
@@ -18,6 +18,7 @@ export default (state = initialState, action) => {
 		case SAVE_MEDIA:
 			return {
 				...state,
+				media: action.payload,
 				success: true,
 				loading: false,
 			};

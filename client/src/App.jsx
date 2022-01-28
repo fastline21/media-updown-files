@@ -7,7 +7,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import configureStore from './configureStore';
 
 import Home from 'containers/Home';
-// import Output from 'containers/Output';
 import NotFound from 'containers/NotFound';
 
 import Header from 'components/Header';
@@ -25,7 +24,6 @@ const App = () => {
 						<Header />
 						<Routes>
 							<Route exact path="/" element={<Home />} />
-							{/* <Route exact path="/output" element={<Output />} /> */}
 							<Route path="*" element={<NotFound />} />
 						</Routes>
 						<Footer />

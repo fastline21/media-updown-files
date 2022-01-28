@@ -1,8 +1,11 @@
 import React from 'react';
 import { Box, AppBar, Toolbar, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
 
 const Header = () => {
+	const openLink = (link) => {
+		return window.open(link, '_blank');
+	};
+
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position="fixed">
@@ -14,13 +17,16 @@ const Header = () => {
 					>
 						Media UpDown Files
 					</Typography>
-					<Button color="inherit" component={Link} to="/">
-						Home
+					<Button
+						color="inherit"
+						onClick={() => {
+							openLink(
+								process.env.REACT_APP_IMDB_IMAGE_DOWNLOADER_URL
+							);
+						}}
+					>
+						IMDb Image Downloader
 					</Button>
-					{/* TODO: Complete Public folder access. */}
-					{/* <Button color='inherit' component={Link} to='/output'>
-						Output
-					</Button> */}
 				</Toolbar>
 			</AppBar>
 		</Box>

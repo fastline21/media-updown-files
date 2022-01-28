@@ -6,6 +6,7 @@ import {
 	TextField,
 	Button,
 	LinearProgress,
+	Fab,
 } from '@mui/material';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -16,6 +17,7 @@ import {
 	Upload as UploadIcon,
 	Image as ImageIcon,
 	OndemandVideo as OndemandVideoIcon,
+	Save as SaveIcon,
 } from '@mui/icons-material';
 
 import convertStringToArray from 'utils/convertStringToArray';
@@ -80,7 +82,10 @@ const Home = ({
 
 		const newFormData = new FormData();
 		newFormData.append('name', name);
-		newFormData.append('urls', convertedURL);
+
+		convertedURL.forEach((url) => {
+			newFormData.append('urls', url);
+		});
 
 		images.forEach((image) => {
 			newFormData.append('images', image);
@@ -187,7 +192,7 @@ const Home = ({
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [success, error]);
+	}, [success, error, media]);
 
 	return (
 		<div>
@@ -216,31 +221,32 @@ const Home = ({
 						alignItems: 'center',
 					}}
 				>
-					<Box component='form' onSubmit={handleSubmit}>
+					<Box component="form" onSubmit={handleSubmit}>
 						<TextField
-							margin='normal'
-							id='name'
-							label='Name'
-							variant='outlined'
-							name='name'
+							margin="normal"
+							id="name"
+							label="Name"
+							variant="outlined"
+							name="name"
 							required
 							value={name}
 							onChange={handleChange}
 							fullWidth
 						/>
 						<TextField
-							margin='normal'
-							id='urls'
-							label='URLs'
-							variant='outlined'
-							name='urls'
+							margin="normal"
+							id="urls"
+							label="URLs"
+							variant="outlined"
+							name="urls"
 							value={urls}
 							onChange={handleChange}
 							multiline
 							fullWidth
 						/>
 						<Box
-							component='div'
+							component="div"
+							className="upload-media"
 							sx={{ marginTop: '16px' }}
 							{...getRootProps()}
 						>
@@ -279,40 +285,50 @@ const Home = ({
 								</Box>
 							)}
 						</Box>
-						<Button
-							type='submit'
-							variant='contained'
+						{/* <Button
+							type="submit"
+							variant="contained"
 							fullWidth
 							sx={{ mt: 3, mb: 2 }}
-							size='large'
+							size="large"
 						>
 							Submit
-						</Button>
+						</Button> */}
+						<Box sx={{ position: 'fixed', bottom: 80, right: 16 }}>
+							<Fab
+								color="primary"
+								aria-label="save"
+								type="submit"
+								disabled={loading}
+							>
+								<SaveIcon />
+							</Fab>
+						</Box>
 					</Box>
 				</Box>
 				<Box sx={{ marginBottom: 15 }}>
 					<Media
-						title='Images'
+						title="Images"
 						medias={images}
-						type='images'
-						actionTitle='Image'
+						type="images"
+						actionTitle="Image"
 						handleClickOpenDialog={({ title, type, index }) =>
 							handleClickOpenDialog({ title, type, index })
 						}
 					/>
 					<Media
-						title='Videos'
+						title="Videos"
 						medias={videos}
-						type='videos'
-						actionTitle='Video'
+						type="videos"
+						actionTitle="Video"
 						handleClickOpenDialog={({ title, type, index }) =>
 							handleClickOpenDialog({ title, type, index })
 						}
 					/>
+					<MediaTable media={media} />
 				</Box>
-				<MediaTable />
 			</Container>
-			<ActionMenu clearFiles={(type = '') => clearFiles(type)} />
+			{/* <ActionMenu clearFiles={(type = '') => clearFiles(type)} /> */}
 		</div>
 	);
 };
