@@ -1,6 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
+// Components
+import OutputMedia from 'components/OutputMedia';
+
+// Utils
 import getPageTitle from 'utils/getPageTitle';
 
 const Output = () => {
@@ -9,6 +13,7 @@ const Output = () => {
 			<Helmet>
 				<title>{getPageTitle('Output')}</title>
 			</Helmet>
+			<OutputMedia />
 		</div>
 	);
 };

@@ -18,11 +18,14 @@ import {
 	OndemandVideo as OndemandVideoIcon,
 } from '@mui/icons-material';
 
+// Utils
 import convertStringToArray from 'utils/convertStringToArray';
 import getPageTitle from 'utils/getPageTitle';
 
+// Actions
 import { saveMedia, clearSuccessMedia } from 'actions/mediaAction';
 
+// Components
 import DialogMedia from 'components/DialogMedia/DialogMedia';
 import Media from 'components/Media';
 import MediaTable from 'components/MediaTable';
@@ -65,7 +68,7 @@ const Home = ({
 		event.preventDefault();
 
 		const convertedURL = convertStringToArray(urls);
-
+		console.log('submit', { convertedURL });
 		const isNotFoundFiles =
 			convertedURL.length === 0 &&
 			images.length === 0 &&
@@ -80,7 +83,7 @@ const Home = ({
 
 		const newFormData = new FormData();
 		newFormData.append('name', name);
-		newFormData.append('urls', convertedURL);
+		newFormData.append('urls', JSON.stringify(convertedURL));
 
 		images.forEach((image) => {
 			newFormData.append('images', image);

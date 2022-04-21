@@ -29,6 +29,10 @@ export const saveMedia = (data) => async (dispatch) => {
 	}
 };
 
+export const loadAllMedia = () => (dispatch) => {
+	
+}
+
 export const clearSuccessMedia = () => (dispatch) => {
 	dispatch({
 		type: CLEAR_SUCCESS,

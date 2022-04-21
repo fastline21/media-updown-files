@@ -3,6 +3,7 @@ import { Box, AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+	console.log();
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<AppBar position='fixed'>
@@ -17,6 +18,10 @@ const Header = () => {
 					<Button color='inherit' component={Link} to='/'>
 						Home
 					</Button>
+					{/* TODO: Transfer the IMDb Image Downloader url to ActionMenu */}
+					{/* <Button color='inherit' href={process.env.REACT_APP_IMDB_IMAGE_DOWNLOADER_URL} target="_blank">
+						Output
+					</Button> */}
 					<Button color='inherit' component={Link} to='/output'>
 						Output
 					</Button>

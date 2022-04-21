@@ -2,6 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
+const path = require('path')
 
 const server = () => {
 	const app = express();

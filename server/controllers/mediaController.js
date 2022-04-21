@@ -8,7 +8,8 @@ const { root } = require('./../utils/getDir');
 const { md5Hash } = require('./hashController');
 
 const saveMedia = async (body, files) => {
-	const { name, urls } = body;
+	const { name, urls: stringURL } = body;
+
 	const { images: uploadImage = [], videos: uploadVideo = [] } = files || {};
 
 	const images = !Array.isArray(uploadImage)
@@ -17,6 +18,8 @@ const saveMedia = async (body, files) => {
 	const videos = !Array.isArray(uploadVideo)
 		? [uploadVideo]
 		: [...uploadVideo];
+
+	const urls = JSON.parse(stringURL);
 
 	const dir = path.join(root, 'public', name);
 	const info = path.join(dir, 'info.json');
@@ -53,10 +56,9 @@ const saveMedia = async (body, files) => {
 
 		for (let count = 0; count < urls.length; count++) {
 			const url = urls[count];
-			const fileExt = path.extname(url);
+			const fileExt = path.extname(url).split('?')[0];
 			const fileName = uuidv4();
 			const file = `${fileName}${fileExt}`;
-
 			const uploadPath = path.resolve(dir, file);
 			const uploadWriter = fs.createWriteStream(uploadPath);
 
