@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
 				...state,
 				success: true,
 				loading: false,
+				media: action.payload
 			};
 		case MEDIA_LOADING:
 			return {

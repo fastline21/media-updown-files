@@ -21,7 +21,7 @@ const saveMedia = async (body, files) => {
 
 	const urls = JSON.parse(stringURL);
 
-	const dir = path.join(root, 'public', name);
+	const dir = path.join(root, 'output', name.replace(/[^a-zA-Z ]/g, ''));
 	const info = path.join(dir, 'info.json');
 
 	const downloadedImage = [];
@@ -52,7 +52,7 @@ const saveMedia = async (body, files) => {
 	const readData = JSON.parse(readInfo);
 
 	if (urls.length > 0) {
-		console.log(`Total URL Images: ${urls.length}`);
+		console.log(`Total URL: ${urls.length}`);
 
 		for (let count = 0; count < urls.length; count++) {
 			const url = urls[count];
@@ -62,30 +62,32 @@ const saveMedia = async (body, files) => {
 			const uploadPath = path.resolve(dir, file);
 			const uploadWriter = fs.createWriteStream(uploadPath);
 
-			const currentImageCount = count + 1;
+			const currentCount = count + 1;
 
 			try {
-				console.log(`Fetching image: ${currentImageCount}`);
+				console.log(`Fetching file: ${currentCount}`);
 				console.log(`File: ${file}`);
 
-				const imageLinkResponse = await axios.default({
+				const linkResponse = await axios.default({
 					method: 'GET',
 					url,
 					responseType: 'stream',
 				});
 
-				console.log(`download start: ${currentImageCount}`);
-				imageLinkResponse.data.pipe(uploadWriter);
+				console.log(`download start: ${currentCount}`);
+				linkResponse.data.pipe(uploadWriter);
 
 				await new Promise((resolve, reject) => {
 					uploadWriter.on('finish', resolve);
 					uploadWriter.on('error', reject);
 				});
 
-				console.log(`download complete: ${currentImageCount}`);
+				console.log(`download complete: ${currentCount}`);
 
 				const currentFile = path.join(dir, file);
 				const md5HashFile = md5Hash(currentFile);
+
+				console.log(file);
 
 				downloadedImage.push({
 					filename: file,
@@ -153,6 +155,7 @@ const saveMedia = async (body, files) => {
 	fs.writeFileSync(info, JSON.stringify(updateData));
 
 	return {
+		name,
 		downloadedImage,
 		downloadedVideo,
 		uploadedImage,

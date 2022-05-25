@@ -1,8 +1,8 @@
 import React from 'react';
 import { SpeedDial, SpeedDialIcon, SpeedDialAction } from '@mui/material';
 import {
-	ClearAll as ClearAllIcon,
-	Clear as ClearIcon,
+	// ClearAll as ClearAllIcon,
+	// Clear as ClearIcon,
 	Download as DownloadIcon,
 } from '@mui/icons-material';
 
@@ -38,7 +38,7 @@ const ActionMenu = ({ clearFiles }) => {
 
 	return (
 		<SpeedDial
-			ariaLabel='SpeedDial basic example'
+			ariaLabel="SpeedDial basic example"
 			sx={{ position: 'fixed', bottom: 80, right: 16 }}
 			icon={<SpeedDialIcon />}
 		>

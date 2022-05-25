@@ -12,7 +12,6 @@ export const saveMedia = (data) => async (dispatch) => {
 		};
 
 		const res = await axios.post('/api/media', data, config);
-		console.log(res.data);
 		dispatch({
 			type: SAVE_MEDIA,
 			payload: res.data,
@@ -29,9 +28,7 @@ export const saveMedia = (data) => async (dispatch) => {
 	}
 };
 
-export const loadAllMedia = () => (dispatch) => {
-	
-}
+export const loadAllMedia = () => (dispatch) => {};
 
 export const clearSuccessMedia = () => (dispatch) => {
 	dispatch({
