@@ -68,7 +68,7 @@ const Home = ({
 		event.preventDefault();
 
 		const convertedURL = convertStringToArray(urls);
-		console.log('submit', { convertedURL });
+
 		const isNotFoundFiles =
 			convertedURL.length === 0 &&
 			images.length === 0 &&
@@ -219,31 +219,31 @@ const Home = ({
 						alignItems: 'center',
 					}}
 				>
-					<Box component='form' onSubmit={handleSubmit}>
+					<Box component="form" onSubmit={handleSubmit}>
 						<TextField
-							margin='normal'
-							id='name'
-							label='Name'
-							variant='outlined'
-							name='name'
+							margin="normal"
+							id="name"
+							label="Name"
+							variant="outlined"
+							name="name"
 							required
 							value={name}
 							onChange={handleChange}
 							fullWidth
 						/>
 						<TextField
-							margin='normal'
-							id='urls'
-							label='URLs'
-							variant='outlined'
-							name='urls'
+							margin="normal"
+							id="urls"
+							label="URLs"
+							variant="outlined"
+							name="urls"
 							value={urls}
 							onChange={handleChange}
 							multiline
 							fullWidth
 						/>
 						<Box
-							component='div'
+							component="div"
 							sx={{ marginTop: '16px' }}
 							{...getRootProps()}
 						>
@@ -283,11 +283,11 @@ const Home = ({
 							)}
 						</Box>
 						<Button
-							type='submit'
-							variant='contained'
+							type="submit"
+							variant="contained"
 							fullWidth
 							sx={{ mt: 3, mb: 2 }}
-							size='large'
+							size="large"
 						>
 							Submit
 						</Button>
@@ -295,25 +295,25 @@ const Home = ({
 				</Box>
 				<Box sx={{ marginBottom: 15 }}>
 					<Media
-						title='Images'
+						title="Images"
 						medias={images}
-						type='images'
-						actionTitle='Image'
+						type="images"
+						actionTitle="Image"
 						handleClickOpenDialog={({ title, type, index }) =>
 							handleClickOpenDialog({ title, type, index })
 						}
 					/>
 					<Media
-						title='Videos'
+						title="Videos"
 						medias={videos}
-						type='videos'
-						actionTitle='Video'
+						type="videos"
+						actionTitle="Video"
 						handleClickOpenDialog={({ title, type, index }) =>
 							handleClickOpenDialog({ title, type, index })
 						}
 					/>
+					<MediaTable media={media} />
 				</Box>
-				<MediaTable />
 			</Container>
 			<ActionMenu clearFiles={(type = '') => clearFiles(type)} />
 		</div>
